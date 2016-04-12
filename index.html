@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+    <meta charset="UTF-8">
+    <head>
+    <title>Placidial Configuration</title>
+    <link rel='stylesheet' type='text/css' href='css/slate.min.css'>
+    <script src='js/slate.min.js'></script>
+    </head>
+
+    <body>
+        <div class='item-container'>
+            <h1 class='title'>Placidial Configuration Page</h1>
+        </div>
+        <div class='item-container'>
+            <!-- <div class='item-container-header'>Second Hand</div> -->
+            <div class='item-container-content'>
+                <label class='item'>
+                    Show Day
+                    <input id='showday' type='checkbox' class='item-toggle'>
+                </label>
+            </div>
+            <div class='item-container-footer'>
+                Show day of month and marker for day of week.
+            </div>
+        </div>
+        <div class='item-container'>
+            <!-- <div class='item-container-header'>Second Hand</div> -->
+            <div class='item-container-content'>
+                <label class='item'>
+                    Show Second Hand
+                    <input id='showsec' type='checkbox' class='item-toggle'>
+                </label>
+            </div>
+            <div class='item-container-footer'>
+                Show hand for seconds.
+            </div>
+        </div>
+
+        <div class='item-container'>
+            <div class='button-container'>
+                <input id='submitButton' type='button' class='item-button' value='SAVE'>
+            </div>
+        </div>
+
+    </body>
+    <script>
+        function getConfigData()
+        {
+            var configData = {
+                'showsec' : +document.getElementById('showsec').checked,
+                'showday' : +document.getElementById('showday').checked,
+            };
+
+            console.log('Got: ' + JSON.stringify(configData));
+            return configData;
+        }
+
+        function getQueryParam(variable, defaultValue)
+        {
+            var query = location.search.substring(1);
+            var vars = query.split('&');
+            for (var i = 0; i < vars.length; i++)
+            {
+                var pair = vars[i].split('=');
+                if (pair[0] === variable) {
+                    return decodeURIComponent(pair[1]);
+                }
+            }
+            return defaultValue || false;
+        }
+
+        var submitButton = document.getElementById('submitButton');
+        submitButton.addEventListener('click', function() {
+            console.log('Submit');
+
+            // Set the return URL depending on the runtime environment
+            var return_to = getQueryParam('return_to', 'pebblejs://close#');
+            document.location =
+                return_to + encodeURIComponent(JSON.stringify(getConfigData()));
+        });
+
+        (function() {
+            document.getElementById("showsec").checked =
+                parseInt(getQueryParam("showsec", 0));
+            document.getElementById("showday").checked =
+                parseInt(getQueryParam("showday", 0));
+        })();
+</script>
+</html>

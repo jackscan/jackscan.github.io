@@ -24,7 +24,6 @@
             </div>
         </div>
         <div class='item-container'>
-            <!-- <div class='item-container-header'>Second Hand</div> -->
             <div class='item-container-content'>
                 <label class='item'>
                     Show Second Hand
@@ -35,7 +34,17 @@
                 Show hand for seconds.
             </div>
         </div>
-
+        <div class='item-container'>
+            <div class='item-container-content'>
+                <label class='item'>
+                    Outline
+                    <input id='outline' type='checkbox' class='item-toggle'>
+                </label>
+            </div>
+            <div class='item-container-footer'>
+                Add a thin outline when drawing clock hands.
+            </div>
+        </div>
         <div class='item-container'>
             <div class='button-container'>
                 <input id='submitButton' type='button' class='item-button' value='SAVE'>
@@ -49,6 +58,7 @@
             var configData = {
                 'showsec' : +document.getElementById('showsec').checked,
                 'showday' : +document.getElementById('showday').checked,
+                'outline' : +document.getElementById('outline').checked,
             };
 
             console.log('Got: ' + JSON.stringify(configData));
@@ -83,7 +93,9 @@
             document.getElementById("showsec").checked =
                 parseInt(getQueryParam("showsec", 0));
             document.getElementById("showday").checked =
-                parseInt(getQueryParam("showday", 0));
+                parseInt(getQueryParam("showday", 1));
+            document.getElementById("outline").checked =
+                parseInt(getQueryParam("outline", 1));
         })();
 </script>
 </html>

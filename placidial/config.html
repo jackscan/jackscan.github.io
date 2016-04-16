@@ -88,8 +88,14 @@
             <div class="item-container-header">Minute Hand</div>
             <div class='item-container-content'>
                 <label class="item">
-                    Color
+                    Hand Color
                     <input id="min-col" type="text" class="item-color item-color-normal">
+                </label>
+            </div>
+            <div class='item-container-content'>
+                <label class="item">
+                    Center Color
+                    <input id="min-centercol" type="text" class="item-color item-color-normal">
                 </label>
             </div>
             <div class="item-container-content">
@@ -119,6 +125,15 @@
                     </div>
                 </label>
             </div>
+            <div class="item-container-content">
+                <label class='item'>Center Width</label>
+                <label class="item">
+                    <input max='32' type="range" class="item-slider" name='min-centerwidth'>
+                    <div class="item-input-wrapper item-slider-text">
+                        <input id='min-centerwidth' type="text" class="item-input" name='min-centerwidth'>
+                    </div>
+                </label>
+            </div>
         </div>
         <div class='item-container'>
             <div class="item-container-header">Second Hand</div>
@@ -130,8 +145,14 @@
             </div>
             <div class='item-container-content'>
                 <label class="item">
-                    Color
+                    Hand Color
                     <input id="sec-col" type="text" class="item-color item-color-normal">
+                </label>
+            </div>
+            <div class='item-container-content'>
+                <label class="item">
+                    Center Color
+                    <input id="sec-centercol" type="text" class="item-color item-color-normal">
                 </label>
             </div>
             <div class="item-container-content">
@@ -158,6 +179,15 @@
                     <input max='30' type="range" class="item-slider" name='sec-extend'>
                     <div class="item-input-wrapper item-slider-text">
                         <input id='sec-extend' type="text" class="item-input" name='sec-extend'>
+                    </div>
+                </label>
+            </div>
+            <div class="item-container-content">
+                <label class='item'>Center Width</label>
+                <label class="item">
+                    <input max='32' type="range" class="item-slider" name='sec-centerwidth'>
+                    <div class="item-input-wrapper item-slider-text">
+                        <input id='sec-centerwidth' type="text" class="item-input" name='sec-centerwidth'>
                     </div>
                 </label>
             </div>
@@ -197,6 +227,15 @@
             return packed;
         }
 
+        function getCenter() {
+            var col0 = colorFromString(document.getElementById("min-centercol").value);
+            var col1 = colorFromString(document.getElementById("sec-centercol").value);
+            var r0 = document.getElementById("min-centerwidth").value;
+            var r1 = document.getElementById("sec-centerwidth").value;
+            var packed = (r0 << 24) | (col0 << 16) | (r1 << 8) | col1;
+            return packed;
+        }
+
         function setSlider(name, value) {
             var elems = document.getElementsByName(name);
             for (var e of elems) {
@@ -215,6 +254,18 @@
             setSlider(hand+"-extend", Math.round(extend * 100 / 255));
         }
 
+        function setCenter(packed) {
+            var r0 = (packed >> 24) & 0xFF;
+            var r1 = (packed >> 8) & 0xFF;
+            var col0 = (packed >> 16) & 0xFF;
+            var col1 = (packed) & 0xFF;
+
+            setSlider("min-centerwidth", r0);
+            setSlider("sec-centerwidth", r1);
+            document.getElementById("min-centercol").value = colorToString(col0);
+            document.getElementById("sec-centercol").value = colorToString(col1);
+        }
+
         function getConfigData() {
             var configData = {
                 'showsec' : +document.getElementById('showsec').checked,
@@ -224,6 +275,7 @@
                 'hour' : getHand('hour'),
                 'min' : getHand('min'),
                 'sec' : getHand('sec'),
+                'center': getCenter(),
             };
 
             console.log('Got: ' + JSON.stringify(configData));
@@ -267,6 +319,7 @@
             setHand("hour", parseInt(getQueryParam("hour", "0xFF80A000")));
             setHand("min", parseInt(getQueryParam("min", "0xFF80D200")));
             setHand("sec", parseInt(getQueryParam("sec", "0xF030D228")));
+            setCenter(parseInt(getQueryParam("center", "0x0EFF08F0")));
         })();
 </script>
 </html>

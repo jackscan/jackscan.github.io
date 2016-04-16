@@ -14,6 +14,15 @@
         <div class='item-container'>
             <!-- <div class='item-container-header'>Second Hand</div> -->
             <div class='item-container-content'>
+                <label class="item">
+                    Background Color
+                    <input id="bgcol" type="text" class="item-color item-color-normal">
+                </label>
+            </div>
+        </div>
+        <div class='item-container'>
+            <!-- <div class='item-container-header'>Second Hand</div> -->
+            <div class='item-container-content'>
                 <label class='item'>
                     Show Day
                     <input id='showday' type='checkbox' class='item-toggle'>
@@ -53,12 +62,30 @@
 
     </body>
     <script>
-        function getConfigData()
-        {
+        function colorFromString(str) {
+            var col = parseInt(str);
+            var col8 = ((col & 0xC00000) >> (22 - 4)) |
+                       ((col & 0x00C000) >> (14 - 2)) |
+                       ((col & 0x0000C0) >> 6);
+            return col8;
+        }
+
+        function colorToString(c) {
+            var col8 = parseInt(c);
+            var col = (((col8 & 0x30) * 0x55) << 12) |
+                      (((col8 & 0x0C) * 0x55) << 6) |
+                      ((col8 & 0x03) * 0x55);
+            var str = "0x" + ("000000" + col.toString(16)).slice(-6);
+            console.log(str);
+            return str;
+        }
+
+        function getConfigData() {
             var configData = {
                 'showsec' : +document.getElementById('showsec').checked,
                 'showday' : +document.getElementById('showday').checked,
                 'outline' : +document.getElementById('outline').checked,
+                'bgcol' : colorFromString(document.getElementById('bgcol').value),
             };
 
             console.log('Got: ' + JSON.stringify(configData));
@@ -96,6 +123,8 @@
                 parseInt(getQueryParam("showday", 1));
             document.getElementById("outline").checked =
                 parseInt(getQueryParam("outline", 1));
+            document.getElementById("bgcol").value =
+                colorToString(getQueryParam("bgcol", 0));
         })();
 </script>
 </html>

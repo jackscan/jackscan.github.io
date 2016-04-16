@@ -9,7 +9,12 @@
 
     <body>
         <div class='item-container'>
-            <h1 class='title'>Placidial Configuration</h1>
+            <h1 class='title' align="center">Placidial Configuration</h1>
+        </div>
+        <div class='item-container'>
+            <div class='button-container'>
+                <input name='submitButton' type='button' class='item-button' value='SAVE'>
+            </div>
         </div>
         <div class='item-container'>
             <!-- <div class='item-container-header'>Second Hand</div> -->
@@ -18,6 +23,17 @@
                     Background Color
                     <input id="bgcol" type="text" class="item-color item-color-normal">
                 </label>
+            </div>
+        </div>
+        <div class='item-container'>
+            <div class='item-container-content'>
+                <label class='item'>
+                    Outline
+                    <input id='outline' type='checkbox' class='item-toggle'>
+                </label>
+            </div>
+            <div class='item-container-footer'>
+                Add a thin outline when drawing clock hands.
             </div>
         </div>
         <div class='item-container'>
@@ -33,30 +49,122 @@
             </div>
         </div>
         <div class='item-container'>
+            <div class="item-container-header">Hour Hand</div>
             <div class='item-container-content'>
-                <label class='item'>
-                    Show Second Hand
-                    <input id='showsec' type='checkbox' class='item-toggle'>
+                <label class="item">
+                    Color
+                    <input id="hour-col" type="text" class="item-color item-color-normal">
                 </label>
             </div>
-            <div class='item-container-footer'>
-                Show hand for seconds.
+            <div class="item-container-content">
+                <label class='item'>Width</label>
+                <label class="item">
+                    <input min='1' max='16' type="range" class="item-slider" name='hour-width'>
+                    <div class="item-input-wrapper item-slider-text">
+                        <input id='hour-width' type="text" class="item-input" name='hour-width'>
+                    </div>
+                </label>
+            </div>
+            <div class="item-container-content">
+                <label class='item'>Length</label>
+                <label class="item">
+                    <input type="range" class="item-slider" name='hour-length'>
+                    <div class="item-input-wrapper item-slider-text">
+                        <input id='hour-length' type="text" class="item-input" name='hour-length'>
+                    </div>
+                </label>
+            </div>
+            <div class="item-container-content">
+                <label class='item'>Extend</label>
+                <label class="item">
+                    <input max='20' type="range" class="item-slider" name='hour-extend'>
+                    <div class="item-input-wrapper item-slider-text">
+                        <input id='hour-extend' type="text" class="item-input" name='hour-extend'>
+                    </div>
+                </label>
             </div>
         </div>
         <div class='item-container'>
+            <div class="item-container-header">Minute Hand</div>
             <div class='item-container-content'>
-                <label class='item'>
-                    Outline
-                    <input id='outline' type='checkbox' class='item-toggle'>
+                <label class="item">
+                    Color
+                    <input id="min-col" type="text" class="item-color item-color-normal">
                 </label>
             </div>
-            <div class='item-container-footer'>
-                Add a thin outline when drawing clock hands.
+            <div class="item-container-content">
+                <label class='item'>Width</label>
+                <label class="item">
+                    <input min='1' max='16' type="range" class="item-slider" name='min-width'>
+                    <div class="item-input-wrapper item-slider-text">
+                        <input id='min-width' type="text" class="item-input" name='min-width'>
+                    </div>
+                </label>
+            </div>
+            <div class="item-container-content">
+                <label class='item'>Length</label>
+                <label class="item">
+                    <input type="range" class="item-slider" name='min-length'>
+                    <div class="item-input-wrapper item-slider-text">
+                        <input id='min-length' type="text" class="item-input" name='min-length'>
+                    </div>
+                </label>
+            </div>
+            <div class="item-container-content">
+                <label class='item'>Extend</label>
+                <label class="item">
+                    <input max='20' type="range" class="item-slider" name='min-extend'>
+                    <div class="item-input-wrapper item-slider-text">
+                        <input id='min-extend' type="text" class="item-input" name='min-extend'>
+                    </div>
+                </label>
+            </div>
+        </div>
+        <div class='item-container'>
+            <div class="item-container-header">Second Hand</div>
+            <div class='item-container-content'>
+                <label class='item'>
+                    Show
+                    <input id='showsec' type='checkbox' class='item-toggle'>
+                </label>
+            </div>
+            <div class='item-container-content'>
+                <label class="item">
+                    Color
+                    <input id="sec-col" type="text" class="item-color item-color-normal">
+                </label>
+            </div>
+            <div class="item-container-content">
+                <label class='item'>Width</label>
+                <label class="item">
+                    <input min='1' max='16' type="range" class="item-slider" name='sec-width'>
+                    <div class="item-input-wrapper item-slider-text">
+                        <input id='sec-width' type="text" class="item-input" name='sec-width'>
+                    </div>
+                </label>
+            </div>
+            <div class="item-container-content">
+                <label class='item'>Length</label>
+                <label class="item">
+                    <input type="range" class="item-slider" name='sec-length'>
+                    <div class="item-input-wrapper item-slider-text">
+                        <input id='sec-length' type="text" class="item-input" name='sec-length'>
+                    </div>
+                </label>
+            </div>
+            <div class="item-container-content">
+                <label class='item'>Extend</label>
+                <label class="item">
+                    <input max='20' type="range" class="item-slider" name='sec-extend'>
+                    <div class="item-input-wrapper item-slider-text">
+                        <input id='sec-extend' type="text" class="item-input" name='sec-extend'>
+                    </div>
+                </label>
             </div>
         </div>
         <div class='item-container'>
             <div class='button-container'>
-                <input id='submitButton' type='button' class='item-button' value='SAVE'>
+                <input name='submitButton' type='button' class='item-button' value='SAVE'>
             </div>
         </div>
 
@@ -66,7 +174,7 @@
             var col = parseInt(str);
             var col8 = ((col & 0xC00000) >> (22 - 4)) |
                        ((col & 0x00C000) >> (14 - 2)) |
-                       ((col & 0x0000C0) >> 6);
+                       ((col & 0x0000C0) >> 6) | 0xC0;
             return col8;
         }
 
@@ -80,12 +188,42 @@
             return str;
         }
 
+        function getHand(hand) {
+            var col = colorFromString(document.getElementById(hand+"-col").value);
+            var width = document.getElementById(hand+"-width").value * 16;
+            var length = Math.round(document.getElementById(hand+"-length").value * 255 / 100);
+            var extend = Math.round(document.getElementById(hand+"-extend").value * 255 / 100);
+            var packed = (col << 24) | (width << 16) | (length << 8) | extend;
+            return packed;
+        }
+
+        function setSlider(name, value) {
+            var elems = document.getElementsByName(name);
+            for (var e of elems) {
+                e.value = value;
+            }
+        }
+
+        function setHand(hand, packed) {
+            var col = (packed >> 24) & 0xFF;
+            var width = (packed >> 16) & 0xFF;
+            var length = (packed >> 8) & 0xFF;
+            var extend = packed & 0xFF;
+            document.getElementById(hand+"-col").value = colorToString(col);
+            setSlider(hand+"-width", Math.round(width / 16));
+            setSlider(hand+"-length", Math.round(length * 100 / 255));
+            setSlider(hand+"-extend", Math.round(extend * 100 / 255));
+        }
+
         function getConfigData() {
             var configData = {
                 'showsec' : +document.getElementById('showsec').checked,
                 'showday' : +document.getElementById('showday').checked,
                 'outline' : +document.getElementById('outline').checked,
                 'bgcol' : colorFromString(document.getElementById('bgcol').value),
+                'hour' : getHand('hour'),
+                'min' : getHand('min'),
+                'sec' : getHand('sec'),
             };
 
             console.log('Got: ' + JSON.stringify(configData));
@@ -106,15 +244,16 @@
             return defaultValue || false;
         }
 
-        var submitButton = document.getElementById('submitButton');
-        submitButton.addEventListener('click', function() {
-            console.log('Submit');
+        var submitButtons = document.getElementsByName('submitButton');
+        for (var b of submitButtons)
+            b.addEventListener('click', function() {
+                console.log('Submit');
 
-            // Set the return URL depending on the runtime environment
-            var return_to = getQueryParam('return_to', 'pebblejs://close#');
-            document.location =
-                return_to + encodeURIComponent(JSON.stringify(getConfigData()));
-        });
+                // Set the return URL depending on the runtime environment
+                var return_to = getQueryParam('return_to', 'pebblejs://close#');
+                document.location =
+                    return_to + encodeURIComponent(JSON.stringify(getConfigData()));
+            });
 
         (function() {
             document.getElementById("showsec").checked =
@@ -125,6 +264,9 @@
                 parseInt(getQueryParam("outline", 1));
             document.getElementById("bgcol").value =
                 colorToString(getQueryParam("bgcol", 0));
+            setHand("hour", parseInt(getQueryParam("hour", "0xFF80A000")));
+            setHand("min", parseInt(getQueryParam("min", "0xFF80D200")));
+            setHand("sec", parseInt(getQueryParam("sec", "0xF030D228")));
         })();
 </script>
 </html>

@@ -238,8 +238,8 @@
 
         function setSlider(name, value) {
             var elems = document.getElementsByName(name);
-            for (var e of elems) {
-                e.value = value;
+            for (var i = 0; i < elems.length; i++) {
+                elems[i].value = value;
             }
         }
 
@@ -297,8 +297,8 @@
         }
 
         var submitButtons = document.getElementsByName('submitButton');
-        for (var b of submitButtons)
-            b.addEventListener('click', function() {
+        for (var i = 0; i < submitButtons.length; i++)
+            submitButtons[i].addEventListener('click', function() {
                 console.log('Submit');
 
                 // Set the return URL depending on the runtime environment

@@ -37,15 +37,39 @@
             </div>
         </div>
         <div class='item-container'>
-            <!-- <div class='item-container-header'>Second Hand</div> -->
+            <div class='item-container-header'>Day</div>
             <div class='item-container-content'>
                 <label class='item'>
-                    Show Day
+                    Show
                     <input id='showday' type='checkbox' class='item-toggle'>
                 </label>
             </div>
+            <div class='item-container-content'>
+                <label class="item">
+                    Day of Month
+                    <input id="dayofmonth" type="text" class="item-color item-color-normal">
+                </label>
+            </div>
+            <div class='item-container-content'>
+                <label class="item">
+                    Weekday
+                    <input id="weekday" type="text" class="item-color item-color-normal">
+                </label>
+            </div>
+            <div class='item-container-content'>
+                <label class="item">
+                    Today
+                    <input id="today" type="text" class="item-color item-color-normal">
+                </label>
+            </div>
+            <div class='item-container-content'>
+                <label class="item">
+                    Sunday
+                    <input id="sunday" type="text" class="item-color item-color-normal">
+                </label>
+            </div>
             <div class='item-container-footer'>
-                Show day of month and marker for day of week.
+                Configure display of day-of-month and weekday.
             </div>
         </div>
         <div class='item-container'>
@@ -263,6 +287,15 @@
             return packed;
         }
 
+        function getDayColors() {
+            var dayofmonth = colorFromString(document.getElementById("dayofmonth").value);
+            var weekday = colorFromString(document.getElementById("weekday").value);
+            var sunday = colorFromString(document.getElementById("sunday").value);
+            var today = colorFromString(document.getElementById("today").value);
+            var packed = (dayofmonth << 24) | (weekday << 16) | (sunday << 8) | today;
+            return packed;
+        }
+
         function setSlider(name, value) {
             var elems = document.getElementsByName(name);
             for (var i = 0; i < elems.length; i++) {
@@ -300,6 +333,18 @@
             setSlider("marker-length", len);
         }
 
+        function setDayColors(packed) {
+            var dayofmonth = (packed >> 24) & 0xFF;
+            var weekday = (packed >> 16) & 0xFF;
+            var sunday = (packed >> 8) & 0xFF;
+            var today = packed & 0xFF;
+
+            document.getElementById("dayofmonth").value = colorToString(dayofmonth);
+            document.getElementById("weekday").value = colorToString(weekday);
+            document.getElementById("sunday").value = colorToString(sunday);
+            document.getElementById("today").value = colorToString(today);
+        }
+
         function getConfigData() {
             var configData = {
                 'showsec' : +document.getElementById('showsec').checked,
@@ -311,6 +356,7 @@
                 'sec' : getHand('sec'),
                 'center': getCenter(),
                 'marker': getMarker(),
+                'daycolors': getDayColors(),
             };
 
             console.log('Got: ' + JSON.stringify(configData));
@@ -356,6 +402,7 @@
             setHand("sec", parseInt(getQueryParam("sec", "0xF030D228")));
             setCenter(parseInt(getQueryParam("center", "0x0EFF08F0")));
             setMarker(parseInt(getQueryParam("marker", "0x00000405")));
+            setDayColors(parseInt(getQueryParam("daycolors", "0xFFFFDBF0")));
         })();
 </script>
 </html>

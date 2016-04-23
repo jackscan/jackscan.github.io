@@ -130,6 +130,18 @@
                     </div>
                 </label>
             </div>
+            <div class='item-container-content'>
+                <label class='item'>
+                    Show Numbers
+                    <input id='showdialnum' type='checkbox' class='item-toggle'>
+                </label>
+            </div>
+            <div class='item-container-content'>
+                <label class="item">
+                    Number Color
+                    <input id="dialnumcolor" type="text" class="item-color item-color-normal">
+                </label>
+            </div>
         </div>
         <div class='item-container'>
             <div class="item-container-header">Hour Hand</div>
@@ -352,6 +364,13 @@
             return packed;
         }
 
+        function getDialNum() {
+            var show = +document.getElementById("showdialnum").checked;
+            var color = colorFromString(document.getElementById("dialnumcolor").value);
+            var packed = (show << 8) | color;
+            return packed;
+        }
+
         function setSlider(name, value) {
             var elems = document.getElementsByName(name);
             for (var i = 0; i < elems.length; i++) {
@@ -413,6 +432,14 @@
             document.getElementById("cvib-" + vibe).className += " active";
         }
 
+        function setDialNum(packed) {
+            var show = (packed >> 8) & 0xFF;
+            var color = packed & 0xFF;
+
+            document.getElementById("showdialnum").checked = show;
+            document.getElementById("dialnumcolor").value = colorToString(color);
+        }
+
         function getConfigData() {
             var configData = {
                 'showsec' : +document.getElementById('showsec').checked,
@@ -426,6 +453,7 @@
                 'marker': getMarker(),
                 'daycolors': getDayColors(),
                 'statusconf': getStatusConf(),
+                'dialnum': getDialNum(),
             };
 
             console.log('Got: ' + JSON.stringify(configData));
@@ -473,6 +501,7 @@
             setMarker(parseInt(getQueryParam("marker", "0x00000405")));
             setDayColors(parseInt(getQueryParam("daycolors", "0xFFFFDBF0")));
             setStatusConf(parseInt(getQueryParam("statusconf", "0x01030AFF")));
+            setDialNum(parseInt(getQueryParam("dialnum", "0x00AA")));
         })();
 </script>
 </html>

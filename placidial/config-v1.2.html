@@ -111,11 +111,23 @@
             </div>
         </div>
         <div class='item-container'>
-            <div class="item-container-header">Dial Marker</div>
+            <div class="item-container-header">Hour Ticks</div>
+            <div class='item-container-content'>
+                <label class='item'>
+                    Show
+                    <input id='hourtick-show' type='checkbox' class='item-toggle'>
+                </label>
+            </div>
+            <div class='item-container-content'>
+                <label class="item">
+                    Color
+                    <input id="hourtick-color" type="text" class="item-color item-color-normal">
+                </label>
+            </div>
             <div class="item-container-content">
                 <label class='item'>Width</label>
                 <label class="item">
-                    <input min='0' max='16' type="range" class="item-slider" name='hourtick-width'>
+                    <input min='1' max='16' type="range" class="item-slider" name='hourtick-width'>
                     <div class="item-input-wrapper item-slider-text">
                         <input id='hourtick-width' type="text" class="item-input" name='hourtick-width'>
                     </div>
@@ -124,21 +136,57 @@
             <div class="item-container-content">
                 <label class='item'>Length</label>
                 <label class="item">
-                    <input min='0' max='16' type="range" class="item-slider" name='hourtick-length'>
+                    <input min='1' max='16' type="range" class="item-slider" name='hourtick-length'>
                     <div class="item-input-wrapper item-slider-text">
                         <input id='hourtick-length' type="text" class="item-input" name='hourtick-length'>
                     </div>
                 </label>
             </div>
+        </div>
+        <div class='item-container'>
+            <div class="item-container-header">Minute Ticks</div>
             <div class='item-container-content'>
                 <label class='item'>
-                    Show Numbers
+                    Show
+                    <input id='mintick-show' type='checkbox' class='item-toggle'>
+                </label>
+            </div>
+            <div class='item-container-content'>
+                <label class="item">
+                    Color
+                    <input id="mintick-color" type="text" class="item-color item-color-normal">
+                </label>
+            </div>
+            <div class="item-container-content">
+                <label class='item'>Width</label>
+                <label class="item">
+                    <input min='1' max='8' type="range" class="item-slider" name='mintick-width'>
+                    <div class="item-input-wrapper item-slider-text">
+                        <input id='mintick-width' type="text" class="item-input" name='mintick-width'>
+                    </div>
+                </label>
+            </div>
+            <div class="item-container-content">
+                <label class='item'>Length</label>
+                <label class="item">
+                    <input min='1' max='16' type="range" class="item-slider" name='mintick-length'>
+                    <div class="item-input-wrapper item-slider-text">
+                        <input id='mintick-length' type="text" class="item-input" name='mintick-length'>
+                    </div>
+                </label>
+            </div>
+        </div>
+        <div class='item-container'>
+            <div class="item-container-header">Dial Numbers</div>
+            <div class='item-container-content'>
+                <label class='item'>
+                    Show
                     <input id='showdialnum' type='checkbox' class='item-toggle'>
                 </label>
             </div>
             <div class='item-container-content'>
                 <label class="item">
-                    Number Color
+                    Color
                     <input id="dialnumcolor" type="text" class="item-color item-color-normal">
                 </label>
             </div>
@@ -340,9 +388,20 @@
         }
 
         function getHourTick() {
+            var show = +document.getElementById("hourtick-show").checked;
             var width = document.getElementById("hourtick-width").value;
             var length = document.getElementById("hourtick-length").value;
-            var packed = (width << 8) | length;
+            var color = colorFromString(document.getElementById("hourtick-color").value);
+            var packed = (show << 24) | (color << 16) | (width << 8) | length;
+            return packed;
+        }
+
+        function getMinTick() {
+            var show = +document.getElementById("mintick-show").checked;
+            var width = document.getElementById("mintick-width").value;
+            var length = document.getElementById("mintick-length").value;
+            var color = colorFromString(document.getElementById("mintick-color").value);
+            var packed = (show << 24) | (color << 16) | (width << 8) | length;
             return packed;
         }
 
@@ -411,10 +470,33 @@
         }
 
         function setHourTick(packed) {
+            var show = (packed >> 24) & 0xFF;
+            var color = (packed >> 16) & 0xFF;
             var width = (packed >> 8) & 0xFF;
             var len = packed & 0xFF;
+
+            // legacy support for old local storage data
+            if (color == 0) {
+                color = colorFromString(document.getElementById("hour-col").value);
+                show = width > 0 && len > 0;
+            }
+
             setSlider("hourtick-width", width);
             setSlider("hourtick-length", len);
+            document.getElementById("hourtick-show").checked = show;
+            document.getElementById("hourtick-color").value = colorToString(color);
+        }
+
+        function setMinTick(packed) {
+            var show = (packed >> 24) & 0xFF;
+            var color = (packed >> 16) & 0xFF;
+            var width = (packed >> 8) & 0xFF;
+            var len = packed & 0xFF;
+
+            setSlider("mintick-width", width);
+            setSlider("mintick-length", len);
+            document.getElementById("mintick-show").checked = show;
+            document.getElementById("mintick-color").value = colorToString(color);
         }
 
         function setDayColors(packed) {
@@ -464,7 +546,7 @@
                 'daycolors': getDayColors(),
                 'statusconf': getStatusConf(),
                 'dialnum': getDialNum(),
-                // 'mintick'
+                'mintick': getMinTick(),
             };
 
             console.log('Got: ' + JSON.stringify(configData));
@@ -511,10 +593,11 @@
             setHand("min", parseInt(getQueryParam("min", "0xFF80D200")));
             setHand("sec", parseInt(getQueryParam("sec", "0xF030D228")));
             setCenter(parseInt(getQueryParam("center", "0x0EFF08F0")));
-            setHourTick(parseInt(getQueryParam("marker", "0x00000405")));
+            setHourTick(parseInt(getQueryParam("marker", "0x01ff0405")));
             setDayColors(parseInt(getQueryParam("daycolors", "0xFFFFDBF0")));
             setStatusConf(parseInt(getQueryParam("statusconf", "0x01030AFF")));
             setDialNum(parseInt(getQueryParam("dialnum", "0x00AA")));
+            setMinTick(parseInt(getQueryParam("mintick", "0x00ff0304")));
         })();
 </script>
 </html>

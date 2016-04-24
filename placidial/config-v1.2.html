@@ -115,18 +115,18 @@
             <div class="item-container-content">
                 <label class='item'>Width</label>
                 <label class="item">
-                    <input min='0' max='16' type="range" class="item-slider" name='marker-width'>
+                    <input min='0' max='16' type="range" class="item-slider" name='hourtick-width'>
                     <div class="item-input-wrapper item-slider-text">
-                        <input id='marker-width' type="text" class="item-input" name='marker-width'>
+                        <input id='hourtick-width' type="text" class="item-input" name='hourtick-width'>
                     </div>
                 </label>
             </div>
             <div class="item-container-content">
                 <label class='item'>Length</label>
                 <label class="item">
-                    <input min='0' max='16' type="range" class="item-slider" name='marker-length'>
+                    <input min='0' max='16' type="range" class="item-slider" name='hourtick-length'>
                     <div class="item-input-wrapper item-slider-text">
-                        <input id='marker-length' type="text" class="item-input" name='marker-length'>
+                        <input id='hourtick-length' type="text" class="item-input" name='hourtick-length'>
                     </div>
                 </label>
             </div>
@@ -339,9 +339,9 @@
             return packed;
         }
 
-        function getMarker() {
-            var width = document.getElementById("marker-width").value;
-            var length = document.getElementById("marker-length").value;
+        function getHourTick() {
+            var width = document.getElementById("hourtick-width").value;
+            var length = document.getElementById("hourtick-length").value;
             var packed = (width << 8) | length;
             return packed;
         }
@@ -410,11 +410,11 @@
             document.getElementById("sec-centercol").value = colorToString(col1);
         }
 
-        function setMarker(packed) {
+        function setHourTick(packed) {
             var width = (packed >> 8) & 0xFF;
             var len = packed & 0xFF;
-            setSlider("marker-width", width);
-            setSlider("marker-length", len);
+            setSlider("hourtick-width", width);
+            setSlider("hourtick-length", len);
         }
 
         function setDayColors(packed) {
@@ -460,10 +460,11 @@
                 'min' : getHand('min'),
                 'sec' : getHand('sec'),
                 'center': getCenter(),
-                'marker': getMarker(),
+                'marker': getHourTick(),
                 'daycolors': getDayColors(),
                 'statusconf': getStatusConf(),
                 'dialnum': getDialNum(),
+                // 'mintick'
             };
 
             console.log('Got: ' + JSON.stringify(configData));
@@ -510,7 +511,7 @@
             setHand("min", parseInt(getQueryParam("min", "0xFF80D200")));
             setHand("sec", parseInt(getQueryParam("sec", "0xF030D228")));
             setCenter(parseInt(getQueryParam("center", "0x0EFF08F0")));
-            setMarker(parseInt(getQueryParam("marker", "0x00000405")));
+            setHourTick(parseInt(getQueryParam("marker", "0x00000405")));
             setDayColors(parseInt(getQueryParam("daycolors", "0xFFFFDBF0")));
             setStatusConf(parseInt(getQueryParam("statusconf", "0x01030AFF")));
             setDialNum(parseInt(getQueryParam("dialnum", "0x00AA")));

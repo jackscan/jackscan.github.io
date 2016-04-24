@@ -180,14 +180,20 @@
             <div class="item-container-header">Dial Numbers</div>
             <div class='item-container-content'>
                 <label class='item'>
-                    Show
-                    <input id='showdialnum' type='checkbox' class='item-toggle'>
+                    Show Hours
+                    <input id='dial-hour-show' type='checkbox' class='item-toggle'>
+                </label>
+            </div>
+            <div class='item-container-content'>
+                <label class='item'>
+                    Show Minutes
+                    <input id='dial-min-show' type='checkbox' class='item-toggle'>
                 </label>
             </div>
             <div class='item-container-content'>
                 <label class="item">
                     Color
-                    <input id="dialnumcolor" type="text" class="item-color item-color-normal">
+                    <input id="dial-num-color" type="text" class="item-color item-color-normal">
                 </label>
             </div>
         </div>
@@ -433,8 +439,10 @@
         }
 
         function getDialNum() {
-            var show = +document.getElementById("showdialnum").checked;
-            var color = colorFromString(document.getElementById("dialnumcolor").value);
+            var showmin = +document.getElementById("dial-min-show").checked;
+            var showhour = +document.getElementById("dial-hour-show").checked;
+            var show = (showmin << 1) | showhour;
+            var color = colorFromString(document.getElementById("dial-num-color").value);
             var packed = (show << 8) | color;
             return packed;
         }
@@ -474,12 +482,6 @@
             var color = (packed >> 16) & 0xFF;
             var width = (packed >> 8) & 0xFF;
             var len = packed & 0xFF;
-
-            // legacy support for old local storage data
-            if (color == 0) {
-                color = colorFromString(document.getElementById("hour-col").value);
-                show = width > 0 && len > 0;
-            }
 
             setSlider("hourtick-width", width);
             setSlider("hourtick-length", len);
@@ -526,9 +528,9 @@
         function setDialNum(packed) {
             var show = (packed >> 8) & 0xFF;
             var color = packed & 0xFF;
-
-            document.getElementById("showdialnum").checked = show;
-            document.getElementById("dialnumcolor").value = colorToString(color);
+            document.getElementById("dial-hour-show").checked = (show & 0x1) != 0;
+            document.getElementById("dial-min-show").checked = (show & 0x2) != 0;
+            document.getElementById("dial-num-color").value = colorToString(color);
         }
 
         function getConfigData() {

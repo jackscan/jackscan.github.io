@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html>
+    <meta charset="UTF-8">
+    <head>
+    <title>Placidial Configuration</title>
+    <link rel='stylesheet' type='text/css' href='css/slate.min.css'>
+    <script src='js/slate.min.js'></script>
+    </head>
+
+    <body>
+        <div class='item-container'>
+            <h1 class='title' align="center">Placidial Configuration</h1>
+        </div>
+        <div class='item-container'>
+            <div class='button-container'>
+                <input name='submitButton' type='button' class='item-button' value='SAVE'>
+            </div>
+        </div>
+        <div class='item-container'>
+            <!-- <div class='item-container-header'>Second Hand</div> -->
+            <div class='item-container-content'>
+                <label class="item">
+                    Background Color
+                    <input id="bgcol" type="text" class="item-color item-color-normal">
+                </label>
+            </div>
+        </div>
+        <div class='item-container'>
+            <div class='item-container-content'>
+                <label class='item'>
+                    Outline
+                    <input id='outline' type='checkbox' class='item-toggle'>
+                </label>
+            </div>
+            <div class='item-container-footer'>
+                Add a thin outline when drawing clock hands.
+            </div>
+        </div>
+        <div class='item-container'>
+            <div class='item-container-header'>Status</div>
+            <div class='item-container-content'>
+                <label class="item">
+                    Color
+                    <input id="statuscolor" type="text" class="item-color item-color-normal">
+                </label>
+            </div>
+            <div class='item-container-content'>
+                <label class='item'>
+                    Show Icon on Disconnect
+                    <input id='showconn' type='checkbox' class='item-toggle'>
+                </label>
+            </div>
+            <div class='item-container-content'>
+                <label class='item'>
+                    Vibrate on Disconnect
+                </label>
+                <div class="item tab-buttons">
+                    <a name="connvibe" id="cvib-0" class="tab-button">Off</a>
+                    <a name="connvibe" id="cvib-1" class="tab-button">Short</a>
+                    <a name="connvibe" id="cvib-2" class="tab-button">Long</a>
+                    <a name="connvibe" id="cvib-3" class="tab-button">Double</a>
+                </div>
+            </div>
+            <div class='item-container-content'>
+                <label class='item'>Battery Warn Level</label>
+                <label class="item">
+                    <input type="range" class="item-slider" name='batwarn'>
+                    <div class="item-input-wrapper item-slider-text">
+                        <input id='batwarn' type="text" class="item-input" name='batwarn'>
+                    </div>
+                </label>
+            </div>
+            <div class='item-container-footer'>
+                Configure battery and bluetooth status.
+            </div>
+        </div>
+        <div class='item-container'>
+            <div class='item-container-header'>Day</div>
+            <div class='item-container-content'>
+                <label class='item'>
+                    Show
+                    <input id='showday' type='checkbox' class='item-toggle'>
+                </label>
+            </div>
+            <div class='item-container-content'>
+                <label class="item">
+                    Day of Month
+                    <input id="dayofmonth" type="text" class="item-color item-color-normal">
+                </label>
+            </div>
+            <div class='item-container-content'>
+                <label class="item">
+                    Today
+                    <input id="today" type="text" class="item-color item-color-normal">
+                </label>
+            </div>
+            <div class='item-container-content'>
+                <label class="item">
+                    Weekday
+                    <input id="weekday" type="text" class="item-color item-color-normal">
+                </label>
+            </div>
+            <div class='item-container-content'>
+                <label class="item">
+                    Sunday
+                    <input id="sunday" type="text" class="item-color item-color-normal">
+                </label>
+            </div>
+            <div class='item-container-footer'>
+                Configure display of day-of-month and weekday.
+            </div>
+        </div>
+        <div class='item-container'>
+            <div class="item-container-header">Dial Marker</div>
+            <div class="item-container-content">
+                <label class='item'>Width</label>
+                <label class="item">
+                    <input min='0' max='16' type="range" class="item-slider" name='marker-width'>
+                    <div class="item-input-wrapper item-slider-text">
+                        <input id='marker-width' type="text" class="item-input" name='marker-width'>
+                    </div>
+                </label>
+            </div>
+            <div class="item-container-content">
+                <label class='item'>Length</label>
+                <label class="item">
+                    <input min='0' max='16' type="range" class="item-slider" name='marker-length'>
+                    <div class="item-input-wrapper item-slider-text">
+                        <input id='marker-length' type="text" class="item-input" name='marker-length'>
+                    </div>
+                </label>
+            </div>
+            <div class='item-container-content'>
+                <label class='item'>
+                    Show Numbers
+                    <input id='showdialnum' type='checkbox' class='item-toggle'>
+                </label>
+            </div>
+            <div class='item-container-content'>
+                <label class="item">
+                    Number Color
+                    <input id="dialnumcolor" type="text" class="item-color item-color-normal">
+                </label>
+            </div>
+        </div>
+        <div class='item-container'>
+            <div class="item-container-header">Hour Hand</div>
+            <div class='item-container-content'>
+                <label class='item'>
+                    Below Minute Hand
+                    <input id='hourbelow' type='checkbox' class='item-toggle'>
+                </label>
+            </div>
+            <div class='item-container-content'>
+                <label class="item">
+                    Color
+                    <input id="hour-col" type="text" class="item-color item-color-normal">
+                </label>
+            </div>
+            <div class="item-container-content">
+                <label class='item'>Width</label>
+                <label class="item">
+                    <input min='1' max='15' type="range" class="item-slider" name='hour-width'>
+                    <div class="item-input-wrapper item-slider-text">
+                        <input id='hour-width' type="text" class="item-input" name='hour-width'>
+                    </div>
+                </label>
+            </div>
+            <div class="item-container-content">
+                <label class='item'>Length (%)</label>
+                <label class="item">
+                    <input type="range" class="item-slider" name='hour-length'>
+                    <div class="item-input-wrapper item-slider-text">
+                        <input id='hour-length' type="text" class="item-input" name='hour-length'>
+                    </div>
+                </label>
+            </div>
+            <div class="item-container-content">
+                <label class='item'>Extend (%)</label>
+                <label class="item">
+                    <input max='30' type="range" class="item-slider" name='hour-extend'>
+                    <div class="item-input-wrapper item-slider-text">
+                        <input id='hour-extend' type="text" class="item-input" name='hour-extend'>
+                    </div>
+                </label>
+            </div>
+        </div>
+        <div class='item-container'>
+            <div class="item-container-header">Minute Hand</div>
+            <div class='item-container-content'>
+                <label class="item">
+                    Hand Color
+                    <input id="min-col" type="text" class="item-color item-color-normal">
+                </label>
+            </div>
+            <div class="item-container-content">
+                <label class='item'>Width</label>
+                <label class="item">
+                    <input min='1' max='15' type="range" class="item-slider" name='min-width'>
+                    <div class="item-input-wrapper item-slider-text">
+                        <input id='min-width' type="text" class="item-input" name='min-width'>
+                    </div>
+                </label>
+            </div>
+            <div class="item-container-content">
+                <label class='item'>Length (%)</label>
+                <label class="item">
+                    <input type="range" class="item-slider" name='min-length'>
+                    <div class="item-input-wrapper item-slider-text">
+                        <input id='min-length' type="text" class="item-input" name='min-length'>
+                    </div>
+                </label>
+            </div>
+            <div class="item-container-content">
+                <label class='item'>Extend (%)</label>
+                <label class="item">
+                    <input max='30' type="range" class="item-slider" name='min-extend'>
+                    <div class="item-input-wrapper item-slider-text">
+                        <input id='min-extend' type="text" class="item-input" name='min-extend'>
+                    </div>
+                </label>
+            </div>
+        </div>
+        <div class='item-container'>
+            <div class="item-container-header">Center</div>
+            <div class='item-container-content'>
+                <label class="item">
+                    Color
+                    <input id="min-centercol" type="text" class="item-color item-color-normal">
+                </label>
+            </div>
+            <div class="item-container-content">
+                <label class='item'>Width</label>
+                <label class="item">
+                    <input max='32' type="range" class="item-slider" name='min-centerwidth'>
+                    <div class="item-input-wrapper item-slider-text">
+                        <input id='min-centerwidth' type="text" class="item-input" name='min-centerwidth'>
+                    </div>
+                </label>
+            </div>
+        </div>
+        <div class='item-container'>
+            <div class="item-container-header">Second Hand</div>
+            <div class='item-container-content'>
+                <label class='item'>
+                    Show
+                    <input id='showsec' type='checkbox' class='item-toggle'>
+                </label>
+            </div>
+            <div class='item-container-content'>
+                <label class="item">
+                    Hand Color
+                    <input id="sec-col" type="text" class="item-color item-color-normal">
+                </label>
+            </div>
+            <div class='item-container-content'>
+                <label class="item">
+                    Center Color
+                    <input id="sec-centercol" type="text" class="item-color item-color-normal">
+                </label>
+            </div>
+            <div class="item-container-content">
+                <label class='item'>Width</label>
+                <label class="item">
+                    <input min='1' max='15' type="range" class="item-slider" name='sec-width'>
+                    <div class="item-input-wrapper item-slider-text">
+                        <input id='sec-width' type="text" class="item-input" name='sec-width'>
+                    </div>
+                </label>
+            </div>
+            <div class="item-container-content">
+                <label class='item'>Length (%)</label>
+                <label class="item">
+                    <input type="range" class="item-slider" name='sec-length'>
+                    <div class="item-input-wrapper item-slider-text">
+                        <input id='sec-length' type="text" class="item-input" name='sec-length'>
+                    </div>
+                </label>
+            </div>
+            <div class="item-container-content">
+                <label class='item'>Extend (%)</label>
+                <label class="item">
+                    <input max='30' type="range" class="item-slider" name='sec-extend'>
+                    <div class="item-input-wrapper item-slider-text">
+                        <input id='sec-extend' type="text" class="item-input" name='sec-extend'>
+                    </div>
+                </label>
+            </div>
+            <div class="item-container-content">
+                <label class='item'>Center Width</label>
+                <label class="item">
+                    <input max='32' type="range" class="item-slider" name='sec-centerwidth'>
+                    <div class="item-input-wrapper item-slider-text">
+                        <input id='sec-centerwidth' type="text" class="item-input" name='sec-centerwidth'>
+                    </div>
+                </label>
+            </div>
+        </div>
+        <div class='item-container'>
+            <div class='button-container'>
+                <input name='submitButton' type='button' class='item-button' value='SAVE'>
+            </div>
+        </div>
+
+    </body>
+    <script>
+        function colorFromString(str) {
+            var col = parseInt(str);
+            var col8 = ((col & 0xC00000) >> (22 - 4)) |
+                       ((col & 0x00C000) >> (14 - 2)) |
+                       ((col & 0x0000C0) >> 6) | 0xC0;
+            return col8;
+        }
+
+        function colorToString(c) {
+            var col8 = parseInt(c);
+            var col = (((col8 & 0x30) * 0x55) << 12) |
+                      (((col8 & 0x0C) * 0x55) << 6) |
+                      ((col8 & 0x03) * 0x55);
+            var str = "0x" + ("000000" + col.toString(16)).slice(-6);
+            return str;
+        }
+
+        function getHand(hand) {
+            var col = colorFromString(document.getElementById(hand+"-col").value);
+            var width = document.getElementById(hand+"-width").value * 16;
+            var length = Math.round(document.getElementById(hand+"-length").value * 255 / 100);
+            var extend = Math.round(document.getElementById(hand+"-extend").value * 255 / 100);
+            var packed = (col << 24) | (width << 16) | (length << 8) | extend;
+            return packed;
+        }
+
+        function getCenter() {
+            var col0 = colorFromString(document.getElementById("min-centercol").value);
+            var col1 = colorFromString(document.getElementById("sec-centercol").value);
+            var r0 = document.getElementById("min-centerwidth").value;
+            var r1 = document.getElementById("sec-centerwidth").value;
+            var packed = (r0 << 24) | (col0 << 16) | (r1 << 8) | col1;
+            return packed;
+        }
+
+        function getMarker() {
+            var width = document.getElementById("marker-width").value;
+            var length = document.getElementById("marker-length").value;
+            var packed = (width << 8) | length;
+            return packed;
+        }
+
+        function getDayColors() {
+            var dayofmonth = colorFromString(document.getElementById("dayofmonth").value);
+            var weekday = colorFromString(document.getElementById("weekday").value);
+            var sunday = colorFromString(document.getElementById("sunday").value);
+            var today = colorFromString(document.getElementById("today").value);
+            var packed = (dayofmonth << 24) | (weekday << 16) | (sunday << 8) | today;
+            return packed;
+        }
+
+        function getStatusConf() {
+            var showconn = +document.getElementById("showconn").checked;
+            var vibe = 0;
+            var warn = document.getElementById("batwarn").value;
+            var color = colorFromString(document.getElementById("statuscolor").value);
+
+            var vtabs = document.getElementsByName("connvibe");
+            var active = /\bactive\b/;
+            for (var i = 0; i < vtabs.length; i++)
+                if (active.test(vtabs[i].className)){
+                    vibe = i;
+                    break;
+                }
+
+            var packed = (showconn << 24) | (vibe << 16) | (warn << 8) | color;
+            return packed;
+        }
+
+        function getDialNum() {
+            var show = +document.getElementById("showdialnum").checked;
+            var color = colorFromString(document.getElementById("dialnumcolor").value);
+            var packed = (show << 8) | color;
+            return packed;
+        }
+
+        function setSlider(name, value) {
+            var elems = document.getElementsByName(name);
+            for (var i = 0; i < elems.length; i++) {
+                elems[i].value = value;
+            }
+        }
+
+        function setHand(hand, packed) {
+            var col = (packed >> 24) & 0xFF;
+            var width = (packed >> 16) & 0xFF;
+            var length = (packed >> 8) & 0xFF;
+            var extend = packed & 0xFF;
+            document.getElementById(hand+"-col").value = colorToString(col);
+            setSlider(hand+"-width", Math.round(width / 16));
+            setSlider(hand+"-length", Math.round(length * 100 / 255));
+            setSlider(hand+"-extend", Math.round(extend * 100 / 255));
+        }
+
+        function setCenter(packed) {
+            var r0 = (packed >> 24) & 0xFF;
+            var r1 = (packed >> 8) & 0xFF;
+            var col0 = (packed >> 16) & 0xFF;
+            var col1 = (packed) & 0xFF;
+
+            setSlider("min-centerwidth", r0);
+            setSlider("sec-centerwidth", r1);
+            document.getElementById("min-centercol").value = colorToString(col0);
+            document.getElementById("sec-centercol").value = colorToString(col1);
+        }
+
+        function setMarker(packed) {
+            var width = (packed >> 8) & 0xFF;
+            var len = packed & 0xFF;
+            setSlider("marker-width", width);
+            setSlider("marker-length", len);
+        }
+
+        function setDayColors(packed) {
+            var dayofmonth = (packed >> 24) & 0xFF;
+            var weekday = (packed >> 16) & 0xFF;
+            var sunday = (packed >> 8) & 0xFF;
+            var today = packed & 0xFF;
+
+            document.getElementById("dayofmonth").value = colorToString(dayofmonth);
+            document.getElementById("weekday").value = colorToString(weekday);
+            document.getElementById("sunday").value = colorToString(sunday);
+            document.getElementById("today").value = colorToString(today);
+        }
+
+        function setStatusConf(packed) {
+            var showconn = (packed >> 24) & 0xFF;
+            var vibe = (packed >> 16) & 0xFF;
+            var warn = (packed >> 8) & 0xFF;
+            var color = packed & 0xFF;
+
+            document.getElementById("statuscolor").value = colorToString(color);
+            document.getElementById("showconn").checked = showconn;
+            setSlider("batwarn", warn);
+            document.getElementById("cvib-" + vibe).className += " active";
+        }
+
+        function setDialNum(packed) {
+            var show = (packed >> 8) & 0xFF;
+            var color = packed & 0xFF;
+
+            document.getElementById("showdialnum").checked = show;
+            document.getElementById("dialnumcolor").value = colorToString(color);
+        }
+
+        function getConfigData() {
+            var configData = {
+                'showsec' : +document.getElementById('showsec').checked,
+                'showday' : +document.getElementById('showday').checked,
+                'outline' : +document.getElementById('outline').checked,
+                'hourbelow' : +document.getElementById('hourbelow').checked,
+                'bgcol' : colorFromString(document.getElementById('bgcol').value),
+                'hour' : getHand('hour'),
+                'min' : getHand('min'),
+                'sec' : getHand('sec'),
+                'center': getCenter(),
+                'marker': getMarker(),
+                'daycolors': getDayColors(),
+                'statusconf': getStatusConf(),
+                'dialnum': getDialNum(),
+            };
+
+            console.log('Got: ' + JSON.stringify(configData));
+            return configData;
+        }
+
+        function getQueryParam(variable, defaultValue)
+        {
+            var query = location.search.substring(1);
+            var vars = query.split('&');
+            for (var i = 0; i < vars.length; i++)
+            {
+                var pair = vars[i].split('=');
+                if (pair[0] === variable) {
+                    return decodeURIComponent(pair[1]);
+                }
+            }
+            return defaultValue || false;
+        }
+
+        var submitButtons = document.getElementsByName('submitButton');
+        for (var i = 0; i < submitButtons.length; i++)
+            submitButtons[i].addEventListener('click', function() {
+                console.log('Submit');
+
+                // Set the return URL depending on the runtime environment
+                var return_to = getQueryParam('return_to', 'pebblejs://close#');
+                document.location =
+                    return_to + encodeURIComponent(JSON.stringify(getConfigData()));
+            });
+
+        (function() {
+            document.getElementById("showsec").checked =
+                parseInt(getQueryParam("showsec", 0));
+            document.getElementById("showday").checked =
+                parseInt(getQueryParam("showday", 1));
+            document.getElementById("outline").checked =
+                parseInt(getQueryParam("outline", 1));
+            document.getElementById("hourbelow").checked =
+                parseInt(getQueryParam("hourbelow", 0));
+            document.getElementById("bgcol").value =
+                colorToString(getQueryParam("bgcol", 0));
+            setHand("hour", parseInt(getQueryParam("hour", "0xFF80A000")));
+            setHand("min", parseInt(getQueryParam("min", "0xFF80D200")));
+            setHand("sec", parseInt(getQueryParam("sec", "0xF030D228")));
+            setCenter(parseInt(getQueryParam("center", "0x0EFF08F0")));
+            setMarker(parseInt(getQueryParam("marker", "0x00000405")));
+            setDayColors(parseInt(getQueryParam("daycolors", "0xFFFFDBF0")));
+            setStatusConf(parseInt(getQueryParam("statusconf", "0x01030AFF")));
+            setDialNum(parseInt(getQueryParam("dialnum", "0x00AA")));
+        })();
+</script>
+</html>
